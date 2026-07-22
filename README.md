@@ -1,77 +1,113 @@
 # Signal — AI Benchmark Leaderboard
 
-A one-page leaderboard for comparing AI models across three benchmark categories: **Text to Speech**, **Automatic Speech Recognition**, and **Machine Translation**. Built with Next.js, React, and Tailwind CSS. All data is mocked client-side — there is no backend or database.
+A leaderboard for comparing AI models across three benchmark categories: **Text to Speech**, **Automatic Speech Recognition**, and **Machine Translation**.
+
+The project has two parts:
+
+- **`frontend/`** — a Next.js/React app that renders the page and fetches leaderboard data over HTTP.
+- **`backend/`** — a small Flask API that reads `data/benchmark_results.json` and serves it as JSON.
+
+```
+leaderboard_webpage/
+├── frontend/           # Next.js app (React, Tailwind)
+├── backend/            # Flask API
+│   ├── app.py
+│   ├── api/            # route handlers
+│   └── database/       # data-access layer (currently reads the JSON file)
+├── data/
+│   └── benchmark_results.json   # the actual leaderboard data — edit this to update results
+└── docker-compose.yml
+```
 
 ## Requirements
 
-- [Node.js](https://nodejs.org) 20 or later (includes `npm`)
+- [Node.js](https://nodejs.org) 20+ (`node -v`, `npm -v`)
+- [Python](https://python.org) 3.10+ (`python3 -V`)
+- Optionally, [Docker](https://docker.com) if you'd rather run both services with one command.
 
-Check what you have installed:
+## Running it locally (two terminals)
+
+**Terminal 1 — backend:**
 
 ```bash
-node -v
-npm -v
+cd backend
+python3 -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
 ```
 
-If you don't have Node installed, download it from [nodejs.org](https://nodejs.org) (or on macOS, run `brew install node`).
-
-## Running it locally
-
-Clone the repo, install dependencies, and start the dev server:
+The API is now running at [http://localhost:8000](http://localhost:8000). Check it with:
 
 ```bash
-git clone <your-repo-url>
-cd leaderboard_webpage
+curl http://localhost:8000/api/health
+```
+
+**Terminal 2 — frontend:**
+
+```bash
+cd frontend
 npm install
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser. The page hot-reloads as you edit files.
+Open [http://localhost:3000](http://localhost:3000). By default the frontend talks to `http://localhost:8000/api`; to point it somewhere else, copy `frontend/.env.example` to `frontend/.env.local` and change `NEXT_PUBLIC_API_URL`.
 
-Other useful commands:
+## Running it with Docker Compose (one command)
 
 ```bash
-npm run build   # production build (also a good sanity check before deploying)
-npm run start   # serve the production build locally, after `npm run build`
+docker compose up --build
+```
+
+This builds and starts both services — frontend on `:3000`, backend on `:8000` — wired together automatically.
+
+## Updating the leaderboard data
+
+Edit `data/benchmark_results.json`. It has two top-level keys:
+
+- `categories` — the three category cards (label, description, etc.)
+- `results` — an array of model entries per category (`tts`, `asr`, `mt`), each shaped like:
+
+```json
+{
+  "rank": 1,
+  "model": "Sonic Turbo v3",
+  "organization": "Cartesia",
+  "score": 96.8,
+  "accuracy": 98.1,
+  "latency": 82,
+  "license": "Proprietary",
+  "parameters": "1.2B",
+  "lastUpdated": "2026-07-01"
+}
+```
+
+The backend re-reads this file on every request, so changes show up on a page refresh — no restart needed. The frontend never needs to change when you add, remove, or edit models.
+
+## Useful commands
+
+```bash
+# frontend/
+npm run dev     # start the dev server
+npm run build   # production build (good sanity check before deploying)
+npm run start   # serve the production build, after npm run build
 npm run lint    # run ESLint
+
+# backend/ (with venv activated)
+python app.py   # start the API (defaults to port 8000, override with PORT=...)
 ```
 
-## Project structure
+## Deploying
 
-```
-src/
-  app/
-    layout.tsx      # fonts, global <head>, page shell
-    page.tsx         # assembles the page, holds search + category state
-    globals.css      # theme tokens (colors, fonts, shadows) and global styles
-  components/
-    Navbar.tsx
-    Hero.tsx
-    SearchBar.tsx
-    CategoryTabs.tsx        # the three TTS / ASR / MT buttons
-    LeaderboardTable.tsx
-  data/
-    leaderboard-data.ts     # mock model data for all three categories — edit this to change the data
-```
+**Backend:** deploy `backend/` to any Python host (Render, Railway, Fly.io, a VPS, etc.) as a standard Flask app. Make sure `data/benchmark_results.json` is available to it — either deployed alongside it, or point the `DATA_FILE` env var at wherever you host it.
 
-To change what's on the leaderboard, edit the arrays in `src/data/leaderboard-data.ts` — no other file needs to change.
-
-## Deploying to Vercel
-
-The easiest path (no command line needed after this):
+**Frontend on Vercel:**
 
 1. Push this repo to GitHub (see below if you haven't done that yet).
-2. Go to [vercel.com/new](https://vercel.com/new) and sign in with your GitHub account.
-3. Select this repository and click **Deploy**. Vercel auto-detects Next.js, so the default settings work as-is.
-4. Every future push to your main branch redeploys automatically.
-
-Alternatively, from the command line:
-
-```bash
-npx vercel
-```
-
-and follow the prompts (first run will ask you to log in and link the project).
+2. Go to [vercel.com/new](https://vercel.com/new), sign in with GitHub, and import this repository.
+3. Because the Next.js app lives in `frontend/`, set **Root Directory** to `frontend` in the project's settings (Vercel asks for this during import).
+4. Add an environment variable `NEXT_PUBLIC_API_URL` pointing at your deployed backend's URL (e.g. `https://your-backend.onrender.com/api`).
+5. Click **Deploy**. Every future push to your main branch redeploys automatically.
 
 ## Pushing to GitHub (if you're new to this)
 
@@ -84,4 +120,4 @@ git remote add origin <your-empty-github-repo-url>
 git push -u origin main
 ```
 
-`.gitignore` already excludes the things you shouldn't commit — `node_modules/`, the `.next/` build output, and local env files. You never need to add those manually.
+`.gitignore` already excludes what you shouldn't commit — `frontend/node_modules/`, `frontend/.next/`, the Python `backend/venv/`, and local env files. You never need to add those manually.
