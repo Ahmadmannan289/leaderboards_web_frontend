@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import CategoryTabs from "@/components/CategoryTabs";
@@ -29,7 +28,6 @@ export default function Home() {
 
   return (
     <main id="top" className="relative z-10 flex-1">
-      <Navbar />
       <Hero />
 
       <section className="mx-auto max-w-6xl px-5 pb-10 sm:px-8">
