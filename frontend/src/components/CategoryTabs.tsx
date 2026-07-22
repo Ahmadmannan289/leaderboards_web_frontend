@@ -1,13 +1,7 @@
 "use client";
 
-import { AudioLines, Languages, Mic } from "lucide-react";
-import type { Category, CategoryKey } from "@/data/leaderboard-data";
-
-const ICONS = {
-  tts: AudioLines,
-  asr: Mic,
-  mt: Languages,
-} as const;
+import { CATEGORY_PRESENTATION } from "@/lib/category-presentation";
+import type { CategoryKey, CategoryMeta } from "@/types/leaderboard";
 
 const ACCENT_STYLES = {
   violet: {
@@ -34,7 +28,7 @@ const ACCENT_STYLES = {
 } as const;
 
 type CategoryTabsProps = {
-  categories: Category[];
+  categories: CategoryMeta[];
   active: CategoryKey;
   onSelect: (key: CategoryKey) => void;
 };
@@ -48,9 +42,9 @@ export default function CategoryTabs({ categories, active, onSelect }: CategoryT
       style={{ animationDelay: "300ms" }}
     >
       {categories.map((category) => {
-        const Icon = ICONS[category.key];
+        const { icon: Icon, accent } = CATEGORY_PRESENTATION[category.key];
         const isActive = category.key === active;
-        const styles = ACCENT_STYLES[category.accent];
+        const styles = ACCENT_STYLES[accent];
 
         return (
           <button

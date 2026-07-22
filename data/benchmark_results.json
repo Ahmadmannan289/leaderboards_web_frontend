@@ -1,0 +1,69 @@
+{
+  "categories": [
+    {
+      "key": "tts",
+      "label": "Text to Speech",
+      "shortLabel": "TTS",
+      "description": "Naturalness and intelligibility of synthesized speech",
+      "accuracyLabel": "MOS"
+    },
+    {
+      "key": "asr",
+      "label": "Automatic Speech Recognition",
+      "shortLabel": "ASR",
+      "description": "Transcription accuracy across noisy, real-world audio",
+      "accuracyLabel": "1 - WER"
+    },
+    {
+      "key": "mt",
+      "label": "Machine Translation",
+      "shortLabel": "MT",
+      "description": "Translation quality across 40+ language pairs",
+      "accuracyLabel": "BLEU-derived"
+    }
+  ],
+  "results": {
+    "tts": [
+      { "rank": 1, "model": "Sonic Turbo v3", "organization": "Cartesia", "score": 96.8, "accuracy": 98.1, "latency": 82, "license": "Proprietary", "parameters": "1.2B", "lastUpdated": "2026-07-01" },
+      { "rank": 2, "model": "Aura-2 Studio", "organization": "Deepgram", "score": 95.4, "accuracy": 97.3, "latency": 110, "license": "Proprietary", "parameters": "890M", "lastUpdated": "2026-06-24" },
+      { "rank": 3, "model": "Scribe Voice XL", "organization": "ElevenLabs", "score": 94.9, "accuracy": 97.0, "latency": 140, "license": "Proprietary", "parameters": "1.8B", "lastUpdated": "2026-06-30" },
+      { "rank": 4, "model": "XTTS-v3", "organization": "Coqui", "score": 91.2, "accuracy": 94.6, "latency": 210, "license": "Apache 2.0", "parameters": "467M", "lastUpdated": "2026-05-19" },
+      { "rank": 5, "model": "tts-1-hd", "organization": "OpenAI", "score": 90.7, "accuracy": 94.1, "latency": 260, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-05-02" },
+      { "rank": 6, "model": "WaveNet XL", "organization": "Google DeepMind", "score": 89.8, "accuracy": 93.5, "latency": 175, "license": "Proprietary", "parameters": "1.1B", "lastUpdated": "2026-06-11" },
+      { "rank": 7, "model": "Voicebox-2", "organization": "Meta AI", "score": 88.6, "accuracy": 92.8, "latency": 230, "license": "Research Only", "parameters": "740M", "lastUpdated": "2026-04-27" },
+      { "rank": 8, "model": "PlayHT3", "organization": "Play.ht", "score": 87.1, "accuracy": 91.4, "latency": 190, "license": "Proprietary", "parameters": "620M", "lastUpdated": "2026-05-14" },
+      { "rank": 9, "model": "Rumble Voice", "organization": "Resemble AI", "score": 85.9, "accuracy": 90.6, "latency": 205, "license": "Proprietary", "parameters": "512M", "lastUpdated": "2026-04-08" },
+      { "rank": 10, "model": "Bark-Large", "organization": "Suno", "score": 83.4, "accuracy": 88.2, "latency": 340, "license": "MIT", "parameters": "890M", "lastUpdated": "2026-03-22" },
+      { "rank": 11, "model": "Azure Neural TTS", "organization": "Microsoft", "score": 82.7, "accuracy": 88.0, "latency": 165, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-05-30" },
+      { "rank": 12, "model": "Polly Neural", "organization": "Amazon", "score": 79.5, "accuracy": 85.3, "latency": 155, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-03-01" }
+    ],
+    "asr": [
+      { "rank": 1, "model": "Parakeet-TDT 2.0", "organization": "NVIDIA", "score": 97.2, "accuracy": 98.6, "latency": 48, "license": "Apache 2.0", "parameters": "1.1B", "lastUpdated": "2026-07-05" },
+      { "rank": 2, "model": "Whisper-large-v4", "organization": "OpenAI", "score": 96.5, "accuracy": 98.0, "latency": 95, "license": "MIT", "parameters": "1.5B", "lastUpdated": "2026-06-28" },
+      { "rank": 3, "model": "Universal-2", "organization": "AssemblyAI", "score": 95.8, "accuracy": 97.5, "latency": 88, "license": "Proprietary", "parameters": "980M", "lastUpdated": "2026-06-19" },
+      { "rank": 4, "model": "Nova-3", "organization": "Deepgram", "score": 95.1, "accuracy": 97.1, "latency": 61, "license": "Proprietary", "parameters": "760M", "lastUpdated": "2026-07-02" },
+      { "rank": 5, "model": "USM-XL", "organization": "Google DeepMind", "score": 94.3, "accuracy": 96.4, "latency": 102, "license": "Proprietary", "parameters": "2B", "lastUpdated": "2026-05-21" },
+      { "rank": 6, "model": "Scribe v1", "organization": "ElevenLabs", "score": 93.6, "accuracy": 95.9, "latency": 118, "license": "Proprietary", "parameters": "1.0B", "lastUpdated": "2026-06-06" },
+      { "rank": 7, "model": "Ursa Enterprise", "organization": "Speechmatics", "score": 92.4, "accuracy": 95.0, "latency": 130, "license": "Proprietary", "parameters": "820M", "lastUpdated": "2026-04-30" },
+      { "rank": 8, "model": "MMS-1B", "organization": "Meta AI", "score": 90.1, "accuracy": 93.2, "latency": 145, "license": "Apache 2.0", "parameters": "1.0B", "lastUpdated": "2026-04-11" },
+      { "rank": 9, "model": "Moshi-ASR", "organization": "Kyutai", "score": 88.9, "accuracy": 92.0, "latency": 74, "license": "MIT", "parameters": "560M", "lastUpdated": "2026-03-27" },
+      { "rank": 10, "model": "Azure Speech Pro", "organization": "Microsoft", "score": 87.6, "accuracy": 91.3, "latency": 108, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-05-08" },
+      { "rank": 11, "model": "Transcribe Active", "organization": "Amazon", "score": 85.2, "accuracy": 89.7, "latency": 121, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-02-25" },
+      { "rank": 12, "model": "Watson STT v6", "organization": "IBM", "score": 81.9, "accuracy": 87.1, "latency": 160, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-01-30" }
+    ],
+    "mt": [
+      { "rank": 1, "model": "Next-Gen MT", "organization": "DeepL", "score": 96.1, "accuracy": 97.8, "latency": 190, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-07-08" },
+      { "rank": 2, "model": "GPT-4o Translate", "organization": "OpenAI", "score": 95.6, "accuracy": 97.2, "latency": 240, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-06-30" },
+      { "rank": 3, "model": "Claude Translate", "organization": "Anthropic", "score": 95.0, "accuracy": 96.9, "latency": 225, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-06-22" },
+      { "rank": 4, "model": "NLLB-200 v2", "organization": "Meta AI", "score": 92.7, "accuracy": 94.8, "latency": 165, "license": "MIT", "parameters": "54.5B", "lastUpdated": "2026-05-17" },
+      { "rank": 5, "model": "Aya-MT 32B", "organization": "Cohere", "score": 91.4, "accuracy": 93.9, "latency": 178, "license": "Apache 2.0", "parameters": "32B", "lastUpdated": "2026-05-04" },
+      { "rank": 6, "model": "Translate NMT-XL", "organization": "Google DeepMind", "score": 90.8, "accuracy": 93.4, "latency": 130, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-06-14" },
+      { "rank": 7, "model": "Translator Pro", "organization": "Microsoft", "score": 88.5, "accuracy": 91.6, "latency": 142, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-04-19" },
+      { "rank": 8, "model": "Hunyuan-MT", "organization": "Tencent", "score": 86.9, "accuracy": 90.2, "latency": 205, "license": "Research Only", "parameters": "13B", "lastUpdated": "2026-03-15" },
+      { "rank": 9, "model": "Pure Neural v9", "organization": "Systran", "score": 84.7, "accuracy": 88.5, "latency": 155, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-02-28" },
+      { "rank": 10, "model": "Transformer-MT", "organization": "Baidu", "score": 83.1, "accuracy": 87.0, "latency": 168, "license": "Proprietary", "parameters": "11B", "lastUpdated": "2026-02-09" },
+      { "rank": 11, "model": "Translate Active", "organization": "Amazon", "score": 81.6, "accuracy": 85.4, "latency": 150, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2026-01-22" },
+      { "rank": 12, "model": "Translate Neo", "organization": "Yandex", "score": 78.3, "accuracy": 82.9, "latency": 172, "license": "Proprietary", "parameters": "Undisclosed", "lastUpdated": "2025-12-30" }
+    ]
+  }
+}

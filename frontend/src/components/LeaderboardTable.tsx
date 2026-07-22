@@ -1,7 +1,8 @@
 "use client";
 
 import { SearchX } from "lucide-react";
-import type { Category, License, ModelEntry } from "@/data/leaderboard-data";
+import { CATEGORY_PRESENTATION } from "@/lib/category-presentation";
+import type { CategoryWithEntries, License, ModelEntry } from "@/types/leaderboard";
 
 const ACCENT_BAR = {
   violet: "bg-gradient-to-r from-violet-500 to-violet-300",
@@ -65,11 +66,12 @@ function formatDate(iso: string) {
 }
 
 type LeaderboardTableProps = {
-  category: Category;
+  category: CategoryWithEntries;
   entries: ModelEntry[];
 };
 
 export default function LeaderboardTable({ category, entries }: LeaderboardTableProps) {
+  const accent = CATEGORY_PRESENTATION[category.key].accent;
   const maxScore = Math.max(...category.entries.map((e) => e.score));
 
   return (
@@ -129,13 +131,13 @@ export default function LeaderboardTable({ category, entries }: LeaderboardTable
                 <td className="px-3 py-3.5">
                   <div className="flex flex-col gap-1.5">
                     <span
-                      className={`font-mono text-sm font-medium tabular-num ${ACCENT_TEXT[category.accent]}`}
+                      className={`font-mono text-sm font-medium tabular-num ${ACCENT_TEXT[accent]}`}
                     >
                       {entry.score.toFixed(1)}
                     </span>
                     <span className="h-1 w-16 overflow-hidden rounded-full bg-surface-elevated">
                       <span
-                        className={`block h-full rounded-full ${ACCENT_BAR[category.accent]}`}
+                        className={`block h-full rounded-full ${ACCENT_BAR[accent]}`}
                         style={{ width: `${(entry.score / maxScore) * 100}%` }}
                       />
                     </span>
